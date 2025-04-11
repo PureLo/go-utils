@@ -7,11 +7,11 @@ type PoolWithResetFn[T any] struct {
 	_resetFunc func(T)
 }
 
-func NewPoolWithResetFn[T any](newFn func() T, resetFn func(T)) PoolWithResetFn[T] {
-	return PoolWithResetFn[T]{
+func NewPoolWithResetFn[T any](newFn func() T, resetFn func(T)) *PoolWithResetFn[T] {
+	return &PoolWithResetFn[T]{
 		_pool: sync.Pool{
 			New: func() any {
-				return newFn
+				return newFn()
 			},
 		},
 		_resetFunc: resetFn,
