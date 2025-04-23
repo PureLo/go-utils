@@ -2,28 +2,28 @@ package websocket
 
 import "github.com/gorilla/websocket"
 
-type member struct {
+type Member struct {
 	uuid   string
 	wsCoon *websocket.Conn
 	room   *Room
 }
 
-func NewMember(uuid string, wsCoon *websocket.Conn, room *Room) *member {
+func NewMember(uuid string, wsCoon *websocket.Conn, room *Room) *Member {
 	if uuid == "" || wsCoon == nil || room == nil {
 		return nil
 	}
 
-	return &member{
+	return &Member{
 		uuid:   uuid,
 		wsCoon: wsCoon,
 		room:   room,
 	}
 }
 
-func (m *member) UUID() string {
+func (m *Member) UUID() string {
 	return m.uuid
 }
 
-func (m *member) Publish(msg []byte) error {
+func (m *Member) Publish(msg []byte) error {
 	return m.wsCoon.WriteMessage(websocket.TextMessage, msg)
 }
