@@ -27,3 +27,7 @@ func (m *Member) UUID() string {
 func (m *Member) Publish(msg []byte) error {
 	return m.wsCoon.WriteMessage(websocket.TextMessage, msg)
 }
+
+func (m *Member) Close() error {
+	return m.wsCoon.Close()
+}
