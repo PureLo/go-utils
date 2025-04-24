@@ -2,7 +2,10 @@ module github.com/PureLo/go-utils
 
 go 1.24.2
 
-require github.com/gorilla/websocket v1.5.3
+require (
+	github.com/gorilla/websocket v1.5.3
+	github.com/panjf2000/ants v1.3.0
+)
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

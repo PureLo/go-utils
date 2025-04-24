@@ -25,9 +25,17 @@ func (m *Member) UUID() string {
 }
 
 func (m *Member) Publish(msg []byte) error {
+	if m.wsCoon == nil {
+		return nil
+	}
+
 	return m.wsCoon.WriteMessage(websocket.TextMessage, msg)
 }
 
 func (m *Member) Close() error {
-	return m.wsCoon.Close()
+	if m.wsCoon != nil {
+		return m.wsCoon.Close()
+	}
+
+	return nil
 }

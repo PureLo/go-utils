@@ -19,14 +19,14 @@ func TestRoom(t *testing.T) {
 	wsURL := "ws" + server.URL[4:]
 
 	t.Run("NewRoom", func(t *testing.T) {
-		room := NewRoom("test-room", t.Context())
+		room := NewRoom(t.Context(), "test-room", 100)
 		assert.NotNil(t, room)
 		assert.Equal(t, "test-room", room.ID)
 		assert.NotNil(t, room.crew)
 	})
 
 	t.Run("JoinRoomSafe", func(t *testing.T) {
-		room := NewRoom("test-room", t.Context())
+		room := NewRoom(t.Context(), "test-room", 100)
 		ws, _, err := websocket.DefaultDialer.Dial(wsURL, nil)
 		if err != nil {
 			t.Fatalf("无法创建WebSocket连接: %v", err)
@@ -65,7 +65,7 @@ func TestRoom(t *testing.T) {
 		defer server.Close()
 
 		wsURL := "ws" + server.URL[4:]
-		room := NewRoom("test-room", t.Context())
+		room := NewRoom(t.Context(), "test-room", 100)
 
 		// Create two mock clients
 		client1, err := NewMockClient(wsURL)
@@ -102,7 +102,7 @@ func TestRoom(t *testing.T) {
 }
 
 func TestMember(t *testing.T) {
-	room := NewRoom("test-room", t.Context())
+	room := NewRoom(t.Context(), "test-room", 100)
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		upgrader := websocket.Upgrader{}
 		_, _ = upgrader.Upgrade(w, r, nil)
@@ -138,7 +138,7 @@ func TestRoomManager(t *testing.T) {
 
 	t.Run("RoomManagement", func(t *testing.T) {
 		manager := GetRoomManagerInstance()
-		room := NewRoom("test-room", t.Context())
+		room := NewRoom(t.Context(), "test-room", 100)
 		gotRoom := manager.GetRoom("test-room")
 		assert.Equal(t, room, gotRoom)
 
