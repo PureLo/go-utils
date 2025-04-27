@@ -39,3 +39,7 @@ func (m *Member) Close() error {
 
 	return nil
 }
+
+func (m *Member) SetCloseHandler(h func(code int, text string) error) {
+	m.wsCoon.SetCloseHandler(h)
+}
