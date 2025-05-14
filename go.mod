@@ -6,6 +6,7 @@ require (
 	github.com/docker/docker v28.1.1+incompatible
 	github.com/gorilla/websocket v1.5.3
 	github.com/panjf2000/ants v1.3.0
+	golang.org/x/time v0.11.0
 )
 
 require (
@@ -33,7 +34,6 @@ require (
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/time v0.11.0 // indirect
 	gotest.tools/v3 v3.5.2 // indirect
 )
 
